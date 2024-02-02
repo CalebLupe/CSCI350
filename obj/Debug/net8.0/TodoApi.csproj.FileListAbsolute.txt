@@ -252,3 +252,4 @@ C:\Users\Admin\CODE\CSharp\CSCI350\WEBAPI\TodoApi\bin\Debug\net8.0\runtimes\win\
 C:\Users\Admin\CODE\CSharp\CSCI350\WEBAPI\TodoApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Admin\CODE\CSharp\CSCI350\WEBAPI\TodoApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 c:\Users\Admin\CODE\CSharp\CSCI350\WEBAPI\TodoApi\bin\Debug\net8.0\TodoApi.staticwebassets.runtime.json
+c:\Users\Admin\CODE\CSharp\CSCI350\WEBAPI\TodoApi\obj\Debug\net8.0\TodoApi.sourcelink.json
