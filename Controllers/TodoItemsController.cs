@@ -4,7 +4,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers;
 
-[Route("api/TodoItem")]
+[Route("api/TodoItems")]
 [ApiController]
 public class TodoItemsController : ControllerBase
 {
@@ -25,7 +25,6 @@ public class TodoItemsController : ControllerBase
     }
 
     // GET: api/TodoItems/5
-    // <snippet_GetByID>
     [HttpGet("{id}")]
     public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id)
     {
@@ -38,11 +37,8 @@ public class TodoItemsController : ControllerBase
 
         return ItemToDTO(todoItem);
     }
-    // </snippet_GetByID>
 
     // PUT: api/TodoItems/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // <snippet_Update>
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoDTO)
     {
@@ -58,7 +54,9 @@ public class TodoItemsController : ControllerBase
         }
 
         todoItem.Name = todoDTO.Name;
-        todoItem.IsComplete = todoDTO.IsComplete;
+        todoItem.Status = todoDTO.Status;
+        todoItem.PersonAssigned = todoDTO.PersonAssigned; // Handle PersonAssigned
+        todoItem.Priority = todoDTO.Priority; // Handle Priority
 
         try
         {
@@ -71,29 +69,24 @@ public class TodoItemsController : ControllerBase
 
         return NoContent();
     }
-    // </snippet_Update>
 
     // POST: api/TodoItems
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // <snippet_Create>
     [HttpPost]
     public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
     {
         var todoItem = new TodoItem
         {
-            IsComplete = todoDTO.IsComplete,
-            Name = todoDTO.Name
+            Name = todoDTO.Name,
+            Status = todoDTO.Status,
+            PersonAssigned = todoDTO.PersonAssigned, // Initialize PersonAssigned
+            Priority = todoDTO.Priority // Initialize Priority
         };
 
         _context.TodoItems.Add(todoItem);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(
-            nameof(GetTodoItem),
-            new { id = todoItem.Id },
-            ItemToDTO(todoItem));
+        return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, ItemToDTO(todoItem));
     }
-    // </snippet_Create>
 
     // DELETE: api/TodoItems/5
     [HttpDelete("{id}")]
@@ -111,16 +104,14 @@ public class TodoItemsController : ControllerBase
         return NoContent();
     }
 
-    private bool TodoItemExists(long id)
-    {
-        return _context.TodoItems.Any(e => e.Id == id);
-    }
+    private bool TodoItemExists(long id) => _context.TodoItems.Any(e => e.Id == id);
 
-    private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
-       new TodoItemDTO
-       {
-           Id = todoItem.Id,
-           Name = todoItem.Name,
-           IsComplete = todoItem.IsComplete
-       };
+    private static TodoItemDTO ItemToDTO(TodoItem todoItem) => new TodoItemDTO
+    {
+        Id = todoItem.Id,
+        Name = todoItem.Name,
+        Status = todoItem.Status,
+        PersonAssigned = todoItem.PersonAssigned, 
+        Priority = todoItem.Priority 
+    };
 }

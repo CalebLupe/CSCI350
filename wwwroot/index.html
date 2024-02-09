@@ -10,6 +10,17 @@
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
         <input type="text" id="add-name" placeholder="New to-do">
+        <select id="add-status">
+            <option value="Not started">Not started</option>
+            <option value="In progress">In progress</option>
+            <option value="Complete">Complete</option>
+        </select>
+        <input type="text" id="add-person" placeholder="Person Assigned">
+        <select id="add-priority">
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+        </select>
         <input type="submit" value="Add">
     </form>
 
@@ -17,8 +28,18 @@
         <h3>Edit</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
             <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-isComplete">
-            <input type="text" id="edit-name">
+            <select id="edit-status">
+                <option value="Not started">Not started</option>
+                <option value="In progress">In progress</option>
+                <option value="Complete">Complete</option>
+            </select>
+            <input type="text" id="edit-name" placeholder="Edit to-do">
+            <input type="text" id="edit-person" placeholder="Person Assigned">
+            <select id="edit-priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
             <input type="submit" value="Save">
             <a onclick="closeInput()" aria-label="Close">&#10006;</a>
         </form>
@@ -28,8 +49,10 @@
 
     <table>
         <tr>
-            <th>Is Complete?</th>
+            <th>Status</th>
             <th>Name</th>
+            <th>Person Assigned</th>
+            <th>Priority</th>
             <th></th>
             <th></th>
         </tr>
@@ -37,8 +60,5 @@
     </table>
 
     <script src="js/site.js" asp-append-version="true"></script>
-    <script type="text/javascript">
-        getItems();
-    </script>
 </body>
 </html>
